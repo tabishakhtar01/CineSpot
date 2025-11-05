@@ -36,9 +36,9 @@ It allows users to explore trending, top-rated, upcoming, and popular movies whi
 3. **Search Screen:** Search results and genre filters.
 4. **Favorites Screen:** Saved movies view.
 5. **Profile Screen:** User details and settings.
+---
 -->
 
----
 
 ## Future Enhancements
 - Integrate real user authentication (Firebase Auth)
