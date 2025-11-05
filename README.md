@@ -24,7 +24,7 @@ It allows users to explore trending, top-rated, upcoming, and popular movies whi
 - YouTube Data API (for trailers)
 - AsyncStorage
 - Context API / State Hooks
-- Tailwind CSS or Styled Components (for styling)
+- Styled Components (for styling)
 
 ---
 
