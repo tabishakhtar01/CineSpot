@@ -46,8 +46,8 @@ It allows users to explore trending, top-rated, upcoming, and popular movies whi
 - Multi-language support and dark mode
 - Pagination & lazy loading for improved performance
 
----
 <!--
+---
 ## Project Goal
 CineSpot was created as a **portfolio project** to demonstrate strong React Native and API integration skills.  
 It focuses on delivering a clean user experience and scalable architecture suitable for production-level apps. -->
