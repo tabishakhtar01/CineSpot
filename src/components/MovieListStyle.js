@@ -34,6 +34,7 @@ const MovieListStyle = ({
       <FlatList
         style={{ marginBottom: 10, borderRadius: 10 }}
         data={data}
+        showsVerticalScrollIndicator={false}
         ItemSeparatorComponent={() => <View style={{ marginVertical: 5 }} />}
         keyExtractor={(item) => item?.id}
         renderItem={({ item }) => {

@@ -163,7 +163,7 @@ const MovieDetails = ({ route, navigation }) => {
             <TouchableOpacity
               style={styles.button}
               onPress={() =>
-                navigation.navigate("VideoPlayer", { videoId: videoId })
+                navigation.navigate("MoviePlayer", { videoId: videoId })
               }
             >
               <Text style={styles.buttonText}>Watch Trailer</Text>
@@ -190,6 +190,24 @@ const MovieDetails = ({ route, navigation }) => {
               </Text>
             </TouchableOpacity>
           </View>
+
+          <TouchableOpacity
+            style={[styles.button, { marginTop: 13, width: "100%" }]}
+            onPress={() =>
+              navigation.navigate("MoviePlayer", { moviId: movieId, source: 2 })
+            }
+          >
+            <Text style={styles.buttonText}>Watch Now - Source 1</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={[styles.button, { marginTop: 13, width: "100%" }]}
+            onPress={() =>
+              navigation.navigate("MoviePlayer", { moviId: movieId, source: 1 })
+            }
+          >
+            <Text style={styles.buttonText}>Watch Now - Source 2</Text>
+          </TouchableOpacity>
 
           <View style={styles.castList}>
             <Text style={styles.overviewHead}>Cast</Text>

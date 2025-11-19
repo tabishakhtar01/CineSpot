@@ -12,6 +12,7 @@ import Feather from "@expo/vector-icons/Feather";
 import Favorite from "../screens/Favorite";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Settings from "../screens/Settings";
+import MoviePlayer from "../components/MoviePlayer";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -27,6 +28,7 @@ const HomeNav = () => {
       <Stack.Screen name="HomeNav" component={HomeScreen} />
       <Stack.Screen name="MovieDetails" component={MovieDetails} />
       <Stack.Screen name="VideoPlayer" component={VideoPlayer} />
+      <Stack.Screen name="MoviePlayer" component={MoviePlayer} />
     </Stack.Navigator>
   );
 };
@@ -42,6 +44,7 @@ const SearchNav = () => {
       <Stack.Screen name="SearchScreen" component={Search} />
       <Stack.Screen name="MovieDetails" component={MovieDetails} />
       <Stack.Screen name="VideoPlayer" component={VideoPlayer} />
+      <Stack.Screen name="MoviePlayer" component={MoviePlayer} />
     </Stack.Navigator>
   );
 };
@@ -56,6 +59,7 @@ const FavoriteNav = () => {
     >
       <Stack.Screen name="FavoriteScreen" component={Favorite} />
       <Stack.Screen name="MovieDetails" component={MovieDetails} />
+      <Stack.Screen name="MoviePlayer" component={MoviePlayer} />
     </Stack.Navigator>
   );
 };
