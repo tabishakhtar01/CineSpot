@@ -2,7 +2,7 @@
   "expo": {
     "name": "CineSpot",
     "slug": "CineSpot",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -13,7 +13,9 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.tabishakhtar01.CineSpot",
+      "buildNumber": "2"
     },
     "android": {
       "adaptiveIcon": {
@@ -21,14 +23,13 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.tabishakhtar01.CineSpot"
+      "package": "com.tabishakhtar01.CineSpot",
+      "versionCode": 2
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": [
-      "expo-video"
-    ],
+    "plugins": ["expo-video"],
     "extra": {
       "eas": {
         "projectId": "6d483fe5-c4dc-4687-b7d5-cee72c22f7f3"
