@@ -8,6 +8,7 @@ import {
   Dimensions,
   Platform,
   TouchableOpacity,
+  Animated,
 } from "react-native";
 import React, { useState, useEffect, useRef } from "react";
 import { getMoviesData, getMovieVideos } from "../api/tmdb";
@@ -19,6 +20,7 @@ import ListComponent from "../components/ListComponent";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { LinearGradient } from "expo-linear-gradient";
 import { VideoView, useVideoPlayer } from "expo-video";
+import SplashScreen from "../components/SplashScreen";
 
 const { width } = Dimensions.get("window");
 
@@ -34,6 +36,7 @@ const HomeScreen = ({ navigation }) => {
   const [topRatedMovies, setTopRatedMovies] = useState();
   const [upcomingMovies, setUpcomingMovies] = useState();
   const [videoPlayerId, setVideoPlayerId] = useState();
+  const [showSplash, setShowSplash] = useState(true);
 
   const videoSource = require("../../assets/HeroVideo.mp4");
   const player = useVideoPlayer(videoSource, (player) => {
@@ -75,17 +78,11 @@ const HomeScreen = ({ navigation }) => {
     getMovies();
   }, []);
 
-  if (!trendingMovies || !upcomingMovies || !topRatedMovies || !popularMovies) {
-    return (
-      <SafeAreaView
-        style={[
-          styles.container,
-          { alignItems: "center", justifyContent: "center" },
-        ]}
-      >
-        <ActivityIndicator color="white" size="large" />
-      </SafeAreaView>
-    );
+  if (
+    showSplash &&
+    (!trendingMovies || !upcomingMovies || !topRatedMovies || !popularMovies)
+  ) {
+    return <SplashScreen />;
   }
 
   return (

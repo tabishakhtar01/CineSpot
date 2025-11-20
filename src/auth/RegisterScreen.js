@@ -19,10 +19,19 @@ const RegisterScreen = ({ navigation }) => {
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState();
   const [errorMessage, setErrorMessage] = useState("");
+  const [isValid, setIsValid] = useState(true);
+
+  // email validation
+  const validateEmailId = (text) => {
+    setEmail(text);
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    setIsValid(emailRegex.test(text));
+  };
+
+  console.log({ isValid });
 
   const addUserData = async () => {
-    const isFormValid =
-      name?.length > 0 && email?.length > 0 && password?.length > 0;
+    const isFormValid = name?.length > 0 && isValid && password?.length > 4;
     try {
       if (isFormValid) {
         const user = {
@@ -49,7 +58,18 @@ const RegisterScreen = ({ navigation }) => {
           // alert("User exist");
         }
       } else {
-        setErrorMessage("Fields cant be empty");
+        // setErrorMessage(
+        //   !isValid
+        //     ? "Please enter a valid email address"
+        //     : "Fields cant be empty"
+        // );
+        setErrorMessage(
+          !isValid
+            ? "Please enter a valid email address"
+            : password.length < 5
+            ? "Password must be at least 5 characters long"
+            : "Fields cant be empty"
+        );
         // alert("Fields cant be empty");
       }
       setTimeout(() => {
@@ -104,7 +124,8 @@ const RegisterScreen = ({ navigation }) => {
           placeholder="Email"
           placeholderTextColor="gray"
           value={email}
-          onChangeText={setEmail}
+          // onChangeText={setEmail}
+          onChangeText={(text) => validateEmailId(text)}
           autoCapitalize="none"
           autoComplete="off"
           autoCorrect={false}

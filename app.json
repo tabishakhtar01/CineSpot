@@ -4,27 +4,33 @@
     "slug": "CineSpot",
     "version": "1.0.1",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "icon": "./assets/cinespot-icon.png",
+    "userInterfaceStyle": "dark",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/splash-icon.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#0b0f14",
+      "resizeMode": "cover",
+      "image": "./assets/splash-icon.png"
     },
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.tabishakhtar01.CineSpot",
-      "buildNumber": "2"
+      "buildNumber": "2",
+      "splash": {
+        "backgroundColor": "#0b0f14"
+      }
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/cinespot-icon.png",
+        "backgroundColor": "#000000"
       },
       "edgeToEdgeEnabled": true,
       "package": "com.tabishakhtar01.CineSpot",
-      "versionCode": 2
+      "versionCode": 2,
+      "splash": {
+        "backgroundColor": "#0b0f14"
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
