@@ -2,6 +2,7 @@
   "name": "cinespot",
   "version": "1.0.0",
   "main": "index.js",
+  "homepage": "https://tabishakhtar01.github.io/CineSpot",
   "scripts": {
     "start": "expo start",
     "android": "expo run:android",
@@ -37,6 +38,7 @@
   },
   "private": true,
   "devDependencies": {
-    "babel-preset-expo": "^54.0.6"
+    "babel-preset-expo": "^54.0.6",
+    "gh-pages": "^6.3.0"
   }
 }
