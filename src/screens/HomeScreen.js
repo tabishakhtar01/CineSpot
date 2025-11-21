@@ -60,15 +60,16 @@ const HomeScreen = ({ navigation }) => {
         getMoviesData(UPCOMING_ENDPOINT),
       ]);
 
-      const trendingData = trendingResponse ? trendingResponse.results : [];
-      const videoPlayerResponse = await getMovieVideos(trendingData[0].id);
+      const trendingData = trendingResponse ? trendingResponse?.results : [];
+      const videoPlayerResponse = await getMovieVideos(trendingData?.[0].id);
       const videoPlayerId = videoPlayerResponse?.results?.[0]?.key;
       setVideoPlayerId(videoPlayerId);
 
       setTrendingMovies(trendingData);
-      setTopRatedMovies(topratedResponse.results);
-      setPopularMovies(popularResponse.results);
-      setUpcomingMovies(upcomingResponse.results);
+      setTopRatedMovies(topratedResponse?.results);
+      setPopularMovies(popularResponse?.results);
+      setUpcomingMovies(upcomingResponse?.results);
+      setShowSplash(false);
     } catch (err) {
       console.error("error message", err);
     }
@@ -107,6 +108,7 @@ const HomeScreen = ({ navigation }) => {
             fullscreen={false}
             allowsPictureInPicture={false}
             useNativeControls={false}
+            muted={true}
             pointerEvents="none"
           />
 
@@ -184,7 +186,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 20,
     paddingTop: 20,
-    // paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 15,
     paddingBottom: 8,
     backgroundColor: "rgba(11,15,20,0.85)",
   },

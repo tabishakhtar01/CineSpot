@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   FlatList,
   ActivityIndicator,
+  Platform,
 } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -38,6 +39,8 @@ const MovieDetails = ({ route, navigation }) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState();
+  const source1 = `https://autoembed.co/movie/tmdb/${movieId}`;
+  const source2 = `https://player.embed-api.stream/?id=${movieId}&type=movie`;
 
   const getMovieDetails = async () => {
     try {
@@ -193,18 +196,40 @@ const MovieDetails = ({ route, navigation }) => {
 
           <TouchableOpacity
             style={[styles.button, { marginTop: 13, width: "100%" }]}
-            onPress={() =>
-              navigation.navigate("MoviePlayer", { moviId: movieId, source: 2 })
-            }
+            onPress={() => {
+              if (Platform.OS === "web") {
+                const mobile = /Mobi|Android/i.test(navigator.userAgent);
+                if (mobile) {
+                  window.location.href = source1;
+                } else {
+                  window.open(source1, "_blank");
+                }
+              } else {
+                navigation.navigate("MoviePlayer", {
+                  url: source1,
+                });
+              }
+            }}
           >
             <Text style={styles.buttonText}>Watch Now - Source 1</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             style={[styles.button, { marginTop: 13, width: "100%" }]}
-            onPress={() =>
-              navigation.navigate("MoviePlayer", { moviId: movieId, source: 1 })
-            }
+            onPress={() => {
+              if (Platform.OS === "web") {
+                const mobile = /Mobi|Android/i.test(navigator.userAgent);
+                if (mobile) {
+                  window.location.href = source2;
+                } else {
+                  window.open(source2, "_blank");
+                }
+              } else {
+                navigation.navigate("MoviePlayer", {
+                  url: source2,
+                });
+              }
+            }}
           >
             <Text style={styles.buttonText}>Watch Now - Source 2</Text>
           </TouchableOpacity>
