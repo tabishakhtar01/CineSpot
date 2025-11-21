@@ -12,8 +12,11 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Toaster from "../components/ToasterComponent";
+import { useWindowDimensions } from "react-native";
 
 const Settings = ({ route, navigation }) => {
+  const { width } = useWindowDimensions();
+
   const [oldPassword, setOldPassword] = useState();
   const [newPassword, setNewPassword] = useState();
   const [currentUser, setCurrentuser] = useState();
@@ -87,7 +90,12 @@ const Settings = ({ route, navigation }) => {
   return (
     <KeyboardAvoidingView behavior="padding" style={styles.viewContainer}>
       <SafeAreaView
-        style={styles.container}
+        style={[
+          styles.container,
+          {
+            paddingHorizontal: width > 768 ? 40 : 25,
+          },
+        ]}
         edges={["top"]}
         showsVerticalScrollIndicator={false}
       >
@@ -144,14 +152,25 @@ export default Settings;
 const styles = StyleSheet.create({
   viewContainer: {
     flex: 1,
+    backgroundColor: "#0b0f14",
   },
+  // container: {
+  //   flex: 1,
+  //   backgroundColor: "#0b0f14",
+  //   paddingHorizontal: 25,
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  //   gap: 10,
+  // },
   container: {
     flex: 1,
-    backgroundColor: "#0b0f14",
-    paddingHorizontal: 25,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "#0b0f14",
     gap: 10,
+    width: "100%",
+    maxWidth: 500,
+    alignSelf: "center",
   },
   changePasswordText: {
     color: "white",
@@ -168,6 +187,7 @@ const styles = StyleSheet.create({
     fontWeight: 500,
     color: "gray",
     marginBottom: 10,
+    outlineStyle: "none",
   },
   button: {
     backgroundColor: "#8A2BE2",

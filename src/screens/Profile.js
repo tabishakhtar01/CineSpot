@@ -11,8 +11,11 @@ import EvilIcons from "@expo/vector-icons/EvilIcons";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { AuthContext } from "../context/AuthContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useWindowDimensions } from "react-native";
 
 const Profile = ({ navigation }) => {
+  const { width } = useWindowDimensions();
+
   const { logout } = useContext(AuthContext);
   const [user, setUser] = useState({
     id: "",
@@ -39,41 +42,50 @@ const Profile = ({ navigation }) => {
   return (
     <SafeAreaView
       edges={["top"]}
-      style={styles.container}
+      style={styles.viewContainer}
       showsVerticalScrollIndicator={false}
     >
-      <Pressable
-        style={{ position: "absolute", zIndex: 100, left: 15, top: 75 }}
-        onPress={() => navigation.goBack()}
+      <View
+        style={[
+          styles.container,
+          {
+            paddingHorizontal: width > 768 ? 40 : 25,
+          },
+        ]}
       >
-        <Ionicons name="arrow-back-outline" size={28} color="white" />
-      </Pressable>
-
-      <View style={styles.profile}>
-        <EvilIcons name="user" size={150} color="gray" />
-        <Text style={styles.profileText}>{user?.name}</Text>
-        <Text style={styles.name}>{user?.email}</Text>
-      </View>
-
-      <View style={styles.settingsContainer}>
-        <TouchableOpacity
-          style={styles.settingButton}
-          onPress={() => navigation.navigate("Favorite")}
+        <Pressable
+          style={{ position: "absolute", zIndex: 100, left: 15, top: 75 }}
+          onPress={() => navigation.goBack()}
         >
-          <Text style={styles.settingText}>Favorite</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.settingButton}>
-          <Text style={styles.settingText}>Watchlist</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Settings", { user: user })}
-          style={styles.settingButton}
-        >
-          <Text style={styles.settingText}>Settings</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={logout} style={styles.button}>
-          <Text style={styles.buttonText}>Logout</Text>
-        </TouchableOpacity>
+          <Ionicons name="arrow-back-outline" size={28} color="white" />
+        </Pressable>
+
+        <View style={styles.profile}>
+          <EvilIcons name="user" size={150} color="gray" />
+          <Text style={styles.profileText}>{user?.name}</Text>
+          <Text style={styles.name}>{user?.email}</Text>
+        </View>
+
+        <View style={styles.settingsContainer}>
+          <TouchableOpacity
+            style={styles.settingButton}
+            onPress={() => navigation.navigate("Favorite")}
+          >
+            <Text style={styles.settingText}>Favorite</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.settingButton}>
+            <Text style={styles.settingText}>Watchlist</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Settings", { user: user })}
+            style={styles.settingButton}
+          >
+            <Text style={styles.settingText}>Settings</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={logout} style={styles.button}>
+            <Text style={styles.buttonText}>Logout</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -82,11 +94,19 @@ const Profile = ({ navigation }) => {
 export default Profile;
 
 const styles = StyleSheet.create({
-  container: {
+  viewContainer: {
     flex: 1,
     backgroundColor: "#0b0f14",
-    paddingHorizontal: 25,
-    // justifyContent: "center",
+    alignItems: "center",
+  },
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    backgroundColor: "#0b0f14",
+    gap: 40,
+    width: "100%",
+    maxWidth: 500,
+    // alignSelf: "center",
   },
   profile: {
     // flex: 1,

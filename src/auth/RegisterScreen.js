@@ -11,8 +11,10 @@ import React, { useState, useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Toaster from "../components/ToasterComponent";
+import { useWindowDimensions } from "react-native";
 
 const RegisterScreen = ({ navigation }) => {
+  const { width } = useWindowDimensions();
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -107,7 +109,14 @@ const RegisterScreen = ({ navigation }) => {
 
   return (
     <KeyboardAvoidingView behavior="padding" style={styles.viewContainer}>
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView
+        style={[
+          styles.container,
+          {
+            paddingHorizontal: width > 768 ? 40 : 35,
+          },
+        ]}
+      >
         <Text style={styles.title}> CineSpot</Text>
         <Text style={styles.title2}>Register</Text>
         <TextInput
@@ -161,14 +170,17 @@ export default RegisterScreen;
 const styles = StyleSheet.create({
   viewContainer: {
     flex: 1,
+    backgroundColor: "black",
   },
   container: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "black",
-    gap: 30,
-    paddingHorizontal: 35,
+    gap: 40,
+    width: "100%",
+    maxWidth: 500,
+    alignSelf: "center",
   },
   title: {
     color: "white",
@@ -191,6 +203,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     letterSpacing: 1.2,
     color: "#f2f2f2",
+    outlineStyle: "none",
   },
   btnText: {
     color: "white",

@@ -12,8 +12,10 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AuthContext } from "../context/AuthContext";
 import Toaster from "../components/ToasterComponent";
+import { useWindowDimensions } from "react-native";
 
 const LoginScreen = ({ navigation }) => {
+  const { width } = useWindowDimensions();
   const { login } = useContext(AuthContext);
   const [allUserData, setAllUserData] = useState();
   const [email, setEmail] = useState();
@@ -80,7 +82,14 @@ const LoginScreen = ({ navigation }) => {
 
   return (
     <KeyboardAvoidingView behavior="padding" style={styles.viewContainer}>
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView
+        style={[
+          styles.container,
+          {
+            paddingHorizontal: width > 768 ? 40 : 35,
+          },
+        ]}
+      >
         <Text style={styles.title}> CineSpot</Text>
         <TextInput
           style={styles.input}
@@ -124,6 +133,7 @@ export default LoginScreen;
 const styles = StyleSheet.create({
   viewContainer: {
     flex: 1,
+    backgroundColor: "black",
   },
   container: {
     flex: 1,
@@ -131,7 +141,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "black",
     gap: 40,
-    paddingHorizontal: 35,
+    width: "100%",
+    maxWidth: 500,
+    alignSelf: "center",
   },
   title: {
     color: "white",
@@ -147,6 +159,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     letterSpacing: 1.2,
     color: "#f2f2f2",
+    outlineStyle: "none",
   },
   btnText: {
     color: "white",
