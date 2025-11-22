@@ -8,6 +8,7 @@ import {
   FlatList,
   ActivityIndicator,
   Platform,
+  Dimensions,
 } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -25,6 +26,8 @@ import Toaster from "../components/ToasterComponent";
 import { LinearGradient } from "expo-linear-gradient";
 
 const MovieDetails = ({ route, navigation }) => {
+  const { width } = Dimensions.get("window");
+  const isDesktop = width > 786;
   const { addToFavorite, favorite, removeFavorite } =
     useContext(FavoriteContext);
   const [movieDetails, setMovieDetails] = useState();
@@ -162,11 +165,13 @@ const MovieDetails = ({ route, navigation }) => {
             </Pressable>
           </View>
 
-          <View style={styles.buttonContainer}>
+          <View
+            style={[styles.buttonContainer, { maxWidth: isDesktop && 800 }]}
+          >
             <TouchableOpacity
               style={styles.button}
               onPress={() =>
-                navigation.navigate("MoviePlayer", { videoId: videoId })
+                navigation.navigate("VideoPlayer", { videoId: videoId })
               }
             >
               <Text style={styles.buttonText}>Watch Trailer</Text>
@@ -193,46 +198,47 @@ const MovieDetails = ({ route, navigation }) => {
               </Text>
             </TouchableOpacity>
           </View>
-
-          <TouchableOpacity
-            style={[styles.button, { marginTop: 13, width: "100%" }]}
-            onPress={() => {
-              if (Platform.OS === "web") {
-                const mobile = /Mobi|Android/i.test(navigator.userAgent);
-                if (mobile) {
-                  window.location.href = source1;
+          <View style={{ maxWidth: isDesktop && 800 }}>
+            <TouchableOpacity
+              style={[styles.button, { marginTop: 13, width: "100%" }]}
+              onPress={() => {
+                if (Platform.OS === "web") {
+                  const mobile = /Mobi|Android/i.test(navigator.userAgent);
+                  if (mobile) {
+                    window.location.href = source1;
+                  } else {
+                    window.open(source1, "_blank");
+                  }
                 } else {
-                  window.open(source1, "_blank");
+                  navigation.navigate("MoviePlayer", {
+                    url: source1,
+                  });
                 }
-              } else {
-                navigation.navigate("MoviePlayer", {
-                  url: source1,
-                });
-              }
-            }}
-          >
-            <Text style={styles.buttonText}>Watch Now - Source 1</Text>
-          </TouchableOpacity>
+              }}
+            >
+              <Text style={styles.buttonText}>Watch Now - Source 1</Text>
+            </TouchableOpacity>
 
-          <TouchableOpacity
-            style={[styles.button, { marginTop: 13, width: "100%" }]}
-            onPress={() => {
-              if (Platform.OS === "web") {
-                const mobile = /Mobi|Android/i.test(navigator.userAgent);
-                if (mobile) {
-                  window.location.href = source2;
+            <TouchableOpacity
+              style={[styles.button, { marginTop: 13, width: "100%" }]}
+              onPress={() => {
+                if (Platform.OS === "web") {
+                  const mobile = /Mobi|Android/i.test(navigator.userAgent);
+                  if (mobile) {
+                    window.location.href = source2;
+                  } else {
+                    window.open(source2, "_blank");
+                  }
                 } else {
-                  window.open(source2, "_blank");
+                  navigation.navigate("MoviePlayer", {
+                    url: source2,
+                  });
                 }
-              } else {
-                navigation.navigate("MoviePlayer", {
-                  url: source2,
-                });
-              }
-            }}
-          >
-            <Text style={styles.buttonText}>Watch Now - Source 2</Text>
-          </TouchableOpacity>
+              }}
+            >
+              <Text style={styles.buttonText}>Watch Now - Source 2</Text>
+            </TouchableOpacity>
+          </View>
 
           <View style={styles.castList}>
             <Text style={styles.overviewHead}>Cast</Text>

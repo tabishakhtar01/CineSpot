@@ -22,9 +22,9 @@ import { LinearGradient } from "expo-linear-gradient";
 import { VideoView, useVideoPlayer } from "expo-video";
 import SplashScreen from "../components/SplashScreen";
 
-const { width } = Dimensions.get("window");
-
 const HomeScreen = ({ navigation }) => {
+  const { width } = Dimensions.get("window");
+  const isDesktop = width > 786;
   const TRENDING_ENDPOINT = "/trending/movie/day";
   const POPULAR_ENDPOINT = "/movie/popular";
   const UPCOMING_ENDPOINT = "/movie/upcoming";
@@ -101,9 +101,15 @@ const HomeScreen = ({ navigation }) => {
           </View>
         </View>
 
-        <View style={styles.heroContainer} pointerEvents="none">
+        <View
+          style={[
+            styles.heroContainer,
+            { height: isDesktop && "50vh", aspectRatio: !isDesktop && 16 / 9 },
+          ]}
+          pointerEvents="none"
+        >
           <VideoView
-            style={styles.video}
+            style={!isDesktop && styles.video}
             player={player}
             fullscreen={false}
             allowsPictureInPicture={false}
@@ -202,7 +208,6 @@ const styles = StyleSheet.create({
 
   heroContainer: {
     width: "100%",
-    aspectRatio: 16 / 9,
     position: "relative",
     overflow: "hidden",
     backgroundColor: "#000",
